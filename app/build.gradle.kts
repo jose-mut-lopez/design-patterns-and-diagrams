@@ -40,7 +40,11 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass.set("singleton.AppKt")
+    mainClass.set("AppKt")
+}
+tasks.run.configure {
+    // take stdin from the console when running `./gradlew run`
+    standardInput = System.`in`
 }
 
 tasks.named<Test>("test") {
