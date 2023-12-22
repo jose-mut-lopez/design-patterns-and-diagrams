@@ -5,15 +5,14 @@ enum class ConfigMan {
     INSTANCE;
 
     companion object {
-        fun getSomeConfig(): Int {
-            return 3
-        }
+        var someConfig: Int = 3
     }
 }
 class App {
     val greeting: String
         get() {
-            return "Hello World!"
+            val someConfig = ConfigMan.someConfig
+            return "Hello World with config $someConfig!"
         }
 }
 
