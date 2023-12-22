@@ -1,21 +1,17 @@
 package singleton
 
 
-enum class ConfigMan {
-    INSTANCE;
-
-    companion object {
-        var someConfig: Int = 3
-    }
+class ConfigMan {
+    var someConfig: Int = 3
 }
-class App {
+class App(private val config: ConfigMan) {
     val greeting: String
         get() {
-            val someConfig = ConfigMan.someConfig
+            val someConfig = config.someConfig
             return "Hello World with config $someConfig!"
         }
 }
 
 fun main() {
-    println(App().greeting)
+    println(App(ConfigMan()).greeting)
 }

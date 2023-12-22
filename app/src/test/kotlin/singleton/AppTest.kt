@@ -5,20 +5,20 @@ import kotlin.test.assertEquals
 
 class AppTest {
 
-    // FIXME: This test fails when running tests in parallel because the ConfigMan is a singleton
     @Test fun appDefaultConfig() {
-        assertEquals(ConfigMan.someConfig, 3)
+        assertEquals(ConfigMan().someConfig, 3)
     }
 
-    // FIXME: This test fails when running tests in parallel because the ConfigMan is a singleton
     @Test fun appGreeting() {
-        assertEquals(App().greeting, "Hello World with config 3!")
+        val config = ConfigMan()
+        assertEquals(App(config).greeting, "Hello World with config 3!")
     }
 
     @Test fun appGreetingUpdated() {
-        val app = App()
+        val config = ConfigMan()
+        val app = App(config)
         assertEquals(app.greeting, "Hello World with config 3!")
-        ConfigMan.someConfig = 7
+        config.someConfig = 7
         assertEquals(app.greeting, "Hello World with config 7!")
     }
 }
