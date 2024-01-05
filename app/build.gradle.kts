@@ -40,7 +40,7 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass.set("singleton.AppKt")
+    mainClass.set("refactoring.AppKt")
 }
 
 tasks.named<Test>("test") {

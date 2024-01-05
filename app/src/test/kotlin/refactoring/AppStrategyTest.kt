@@ -1,4 +1,4 @@
-package singleton
+package refactoring
 
 import kotlin.test.Test
 import kotlin.test.assertEquals

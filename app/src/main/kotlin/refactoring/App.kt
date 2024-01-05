@@ -1,4 +1,4 @@
-package singleton
+package refactoring
 
 fun main() {
     println(AppSingleton(ConfigMan()).greeting)
