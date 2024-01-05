@@ -42,6 +42,10 @@ application {
     // Define the main class for the application.
     mainClass.set("refactoring.AppKt")
 }
+tasks.run.configure {
+    // take stdin from the console when running `./gradlew run`
+    standardInput = System.`in`
+}
 
 tasks.named<Test>("test") {
     // Use JUnit Platform for unit tests.
