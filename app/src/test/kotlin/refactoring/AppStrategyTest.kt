@@ -1,13 +1,15 @@
 package refactoring
 
+import java.io.BufferedReader
+import java.io.PrintStream
+import java.io.StringReader
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class AppStrategyTest {
 
-    // FIXME: app.requestData() tries to read from stdin in a test
     @Test fun getInfo() {
-        val app = AppStrategy()
+        val app = AppStrategy(BufferedReader(StringReader("someone\nsomewhere\n")), System.out)
         assertEquals(app.requestData(), "Hello someone from somewhere!")
     }
 
