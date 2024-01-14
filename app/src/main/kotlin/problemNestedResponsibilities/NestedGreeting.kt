@@ -1,13 +1,34 @@
 package problemNestedResponsibilities
 
-class Greeting(val name: String, val name2: String? = null) {
-    fun makeGreeting(): String {
-        // TODO: implement to make tests pass
-        return "Hi $name"
+interface Greeting {
+    fun makeGreeting(): String
+}
+
+class Single(private val name: String) : Greeting {
+    override fun makeGreeting(): String {
+        return name
+    }
+}
+
+class Greet(private val inner: Greeting) : Greeting {
+    override fun makeGreeting(): String {
+        return "Hi ${inner.makeGreeting()}"
+    }
+}
+
+class Bold(private val inner: Greeting) : Greeting {
+    override fun makeGreeting(): String {
+        return "*${inner.makeGreeting()}*"
+    }
+}
+
+class And(private val first: Greeting, private val second: Greeting) : Greeting {
+    override fun makeGreeting(): String {
+        return "${first.makeGreeting()} and ${second.makeGreeting()}"
     }
 }
 
 fun run() {
-    println(Greeting("Alice").makeGreeting())
-    println(Greeting("Alice", "Bob").makeGreeting())
+    println(Greet(Single("Alice")).makeGreeting())
+    println(Greet(And(Bold(Single("Alice")), Single("Bob"))).makeGreeting())
 }
