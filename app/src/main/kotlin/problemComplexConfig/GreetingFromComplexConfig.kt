@@ -6,16 +6,9 @@ class StoredParam<T>(var storedValue: T)  {
     }
 }
 
-enum class ConfigMan {
-    INSTANCE;
-
-    companion object {
-        var someConfig: StoredParam<Int> = StoredParam(3)
-    }
-    private lateinit var configs: MutableMap<String, StoredParam<Int>>
-    fun initialise() {
-        configs = mutableMapOf(Pair("someConfig", ConfigMan.someConfig))
-    }
+class ConfigMan {
+    var someConfig: StoredParam<Int> = StoredParam(3)
+    private var configs: MutableMap<String, StoredParam<Int>> = mutableMapOf(Pair("someConfig", someConfig))
 
     fun updateConfig() {
         // required feature: being able to loop over all configs, not just access each one by name
@@ -25,23 +18,21 @@ enum class ConfigMan {
     }
 }
 
-class GreetingFromComplexConfig {
 
-    init {
-        ConfigMan.INSTANCE.initialise()
-    }
+class GreetingFromComplexConfig(private val config: ConfigMan) {
+
     fun makeGreeting(): String {
         // required feature: being able to access a config by name
         // required feature: use the most recent version of the config when getGreetings is called
-        return "Hello World with config ${ConfigMan.someConfig}!"
+        return "Hello World with config ${config.someConfig}!"
     }
     fun updateConfig() {
-        ConfigMan.INSTANCE.updateConfig()
+        config.updateConfig()
     }
 }
 
 fun run() {
-    val greeting = GreetingFromComplexConfig()
+    val greeting = GreetingFromComplexConfig(ConfigMan())
     println(greeting.makeGreeting())
     greeting.updateConfig()
     println(greeting.makeGreeting())
