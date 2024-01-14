@@ -6,7 +6,8 @@ import kotlin.test.assertEquals
 class InteractiveGreetingTest {
 
     @Test fun makeGreeting() {
-        assertEquals("Hello someone from somewhere!", InteractiveGreeting().makeGreeting())
+        val greeting = InteractiveGreeting(ConstPersonInfo("someone", "somewhere"))
+        assertEquals("Hello someone from somewhere!", greeting.makeGreeting())
     }
 
 }
